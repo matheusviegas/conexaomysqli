@@ -28,31 +28,32 @@ require "database.php";
 ```
 
 
-###Fazendo Consultas no Banco (CRUD)
+###Fazendo Consultas no Banco (CRUD)<br />
 
-Usaremos a tabela abaixo como exemplo do banco de dados:
+Usaremos a tabela abaixo para exemplificar o uso dos métodos do arquivo __database.php__
+<br />
 
+>######Tabela usuarios
 __id__ - INT, Chave Primária e Auto Increment<br />
 __nome__ - VARCHAR e NOT NULL<br />
 __email__ - VARCHAR e NOT NULL<br />
 __idade__ - INT e NOT NULL<br />
+
 
 id            | nome            | email              | idade
 ------------- | ----------------|--------------------|--------
  1            | Usuario Exemplo | usuario@email.com  | 18
 
 
-#####DBCreate() - INSERT [Inserir dados no banco]
+#####DBCreate( ) - INSERT [Inserir dados no banco]
 
-Recebe 2 argumentos:<br />
+Recebe: 2 argumentos<br />
 __Argumento 1:__ tabela<br />
 __Argumento 2:__ array com os dados no formato: __'campo' => 'valor'__
+<br />
+Retorna: __true__ se o registro foi inserido com sucesso ou __false__ se ocorreu algum erro.
 
 Exemplo:
-
-ID            | nome         | email              | idade
-------------- | -------------|--------------------|--------
-Content Cell  | Content Cell | usuario@email.com  | 18
 
 
 ```php
