@@ -115,6 +115,7 @@ body {
 .cover .btn-lg {
   padding: 10px 20px;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 
@@ -152,6 +153,13 @@ body {
   .cover-container {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
   }
+  
+  .cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  width: 100%;
+  }
 }
 
 @media (min-width: 992px) {
@@ -159,12 +167,5 @@ body {
   .mastfoot,
   .cover-container {
     width: 700px;
-  }
-  
-  @media (min-width: 320px) and (max-width: 768px){
-    .cover .btn-lg{
-      margin-bottom: 15px;
-      width: 100%;
-    }
   }
 }
