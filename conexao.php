@@ -28,13 +28,13 @@
 
 	// Fecha Conexão com MySQL
 	function FecharConexao($link){
-		@mysqli_close($link) or die(mysqli_error($link));
+		$link->close() or die ($link->error);
 	}
 
 	// Abre com Conexão com MySQL
 	function AbrirConexao(){
-		$link = @mysqli_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE) or die(mysqli_connect_error());
-		mysqli_set_charset($link, DB_CHARSET) or die(mysqli_error($link));
+		$link = new mysqli(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE) or die($link->connect_error);
+		$link->set_charset(DB_CHARSET) or die ($link->error);
 		
 		return $link;
 	}
