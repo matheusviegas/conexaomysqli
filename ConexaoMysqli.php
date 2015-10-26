@@ -5,7 +5,7 @@
 	// Página Oficial do Projeto: http://matheusviegas.github.io/conexaomysqli/
 
 	require "config.php";
-	require "conexao.php";
+	require "connection.php";
 	
 	class ConexaoMysqli{
 
@@ -79,12 +79,12 @@
 	
 	// Executa Querys
 	function executar($query, $insertId = false){
-		$link 	= AbrirConexao();
+		$link = AbrirConexao();
 
-		$result = @mysqli_query($link, $query) or die(mysqli_error($link));
+		$result = $link->query($query) or die ($link->error);
 
 		if($insertId){
-			$result = mysqli_insert_id($link);
+			$result = $link->insert_id;
 		}
 		
 		FecharConexao($link);
