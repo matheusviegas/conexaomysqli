@@ -28,7 +28,7 @@ require "ConexaoMysqli.php";
 
 ###Fazendo Consultas no Banco (CRUD)<br />
 
-Usaremos a tabela abaixo para exemplificar o uso dos métodos do arquivo __database.php__
+Usaremos a tabela abaixo para exemplificar o uso dos métodos da classe __ConexaoMysqli.php__
 <br />
 
 >######Tabela usuarios
