@@ -59,6 +59,10 @@ body {
 }
 
 
+.mastfoot > .inner > p{
+  color: #ABABAB;
+}
+
 /*
  * Header
  */
