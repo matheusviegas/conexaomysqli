@@ -1,36 +1,54 @@
 <?php
+
+	// Autor: Matheus Souza
+	// Repositório: https://github.com/matheusviegas/conexaomysqli
+	// Página Oficial do Projeto: http://matheusviegas.github.io/conexaomysqli/
+
+	require "config.php";
+	require "conexao.php";
 	
+	class ConexaoMysqli{
+
 	// Deleta Registros
-	function DBDelete($table, $where = null){
+	function delete($table, $where = null){
+		if(DB_PREFIX != null){
 		$table 	= DB_PREFIX.'_'.$table;
+		}
+
 		$where	= ($where) ? " WHERE {$where}" : null;
 		
 		$query 	= "DELETE FROM {$table}{$where}";
-		return DBExecute($query);
+		return self::executar($query);
 	}
 	
 	// Altera Registros
-	function DBUpDate($table, array $data, $where = null, $insertId = false){
+	function update($table, array $data, $where = null, $insertId = false){
 		foreach ($data as $key => $value){
 			$fields[] = "{$key} = '{$value}'";
 		}
 		
 		$fields = implode(', ', $fields);
 		
+		if(DB_PREFIX != null){
 		$table 	= DB_PREFIX.'_'.$table;
+		}
+
 		$where	= ($where) ? " WHERE {$where}" : null;
 		
 		$query 	= "UPDATE {$table} SET {$fields}{$where}";
-		return DBExecute($query, $insertId);
+		return self::executar($query, $insertId);
 	}
 	
 	// Ler Registros
-	function DBRead($table, $params = null, $fields = '*'){
+	function select($table, $where = null, $fields = '*'){
+		if(DB_PREFIX != null){
 		$table 	= DB_PREFIX.'_'.$table;
-		$params = ($params) ? " {$params}" : null;
+		}
 		
-		$query 	= "SELECT {$fields} FROM {$table}{$params}";
-		$result	= DBExecute($query);
+		$where = ($where) ? " WHERE {$where}" : null;
+		
+		$query 	= "SELECT {$fields} FROM {$table}{$where}";
+		$result	= self::executar($query);
 		
 		if(!mysqli_num_rows($result))
 			return false;
@@ -44,26 +62,37 @@
 	}
 	
 	// Grava Registros
-	function DBCreate($table, array $data, $insertId = false){
+	function insert($table, array $data, $insertId = false){
+		if(DB_PREFIX != null){
 		$table 	= DB_PREFIX.'_'.$table;
-		$data 	= DBEscape($data);
+		}
+
+		$data 	= escape($data);
 		
 		$fields	= implode(', ', array_keys($data));
 		$values = "'".implode("', '", $data)."'";
 		
 		$query 	= "INSERT INTO {$table} ( {$fields} ) VALUES ( {$values} )";
 		
-		return DBExecute($query, $insertId);
+		return self::executar($query, $insertId);
 	}
 	
 	// Executa Querys
-	function DBExecute($query, $insertId = false){
-		$link 	= DBConnect();
+	function executar($query, $insertId = false){
+		$link 	= AbrirConexao();
+
 		$result = @mysqli_query($link, $query) or die(mysqli_error($link));
-		
-		if($insertId)
+
+		if($insertId){
 			$result = mysqli_insert_id($link);
+		}
 		
-		DBClose($link);
+		FecharConexao($link);
+
 		return $result;
 	}
+
+
+
+
+} // Fim Class
