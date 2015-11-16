@@ -5,7 +5,7 @@
 	// Página Oficial do Projeto: http://matheusviegas.github.io/conexaomysqli/
 
 	require "config.php";
-	require "connection.php";
+	require "conexao.php";
 	
 	class ConexaoMysqli{
 
